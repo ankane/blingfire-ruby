@@ -31,5 +31,19 @@ namespace :vendor do
     download_file("blingfiretokdll.dll")
   end
 
-  task all: [:linux, :mac, :windows]
+  task :models do
+    require "open-uri"
+    require "fileutils"
+
+    ["wbd_chuni.bin", "bert_base_tok.bin"].each do |file|
+      url = "https://github.com/microsoft/BlingFire/raw/master/dist-pypi/blingfire/#{file}"
+      puts "Downloading #{file}..."
+      FileUtils.mkdir_p("test/support")
+      dest = "test/support/#{file}"
+      File.binwrite(dest, URI.open(url).read)
+      puts "Saved #{dest}"
+    end
+  end
+
+  task all: [:linux, :mac, :windows, :models]
 end
