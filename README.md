@@ -2,6 +2,8 @@
 
 [BlingFire](https://github.com/microsoft/BlingFire) - high speed text tokenization - for Ruby
 
+[![Build Status](https://travis-ci.org/ankane/blingfire.svg?branch=master)](https://travis-ci.org/ankane/blingfire)
+
 ## Installation
 
 Add this line to your application’s Gemfile:
