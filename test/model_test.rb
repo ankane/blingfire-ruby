@@ -13,7 +13,7 @@ class ModelTest < Minitest::Test
   end
 
   def test_text_to_words_with_model
-    skip
+    skip "need to download model"
 
     model = BlingFire.load_model("wbd_chuni.bin")
     text = "This is the Bling-Fire tokenizer. 2007年9月日历表_2007年9月农历阳历一览表-万年历"
@@ -26,7 +26,7 @@ class ModelTest < Minitest::Test
   end
 
   def test_text_to_ids
-    skip
+    skip "need to download model"
 
     s = "Эpple pie. How do I renew my virtual smart card?: /Microsoft IT/ 'virtual' smart card certificates for DirectAccess are valid for one year. In order to get to microsoft.com we need to type pi@1.2.1.2."
     model = BlingFire.load_model("bert_base_tok.bin")
@@ -57,5 +57,11 @@ class ModelTest < Minitest::Test
 
   def test_text_to_sentences_newlines
     assert_equal ["hello world!"], BlingFire.text_to_sentences("hello\nworld!")
+  end
+
+  def test_load_model_invalid
+    skip "terminates with uncaught exception"
+
+    BlingFire.load_model("invalid.bin")
   end
 end
