@@ -2,7 +2,7 @@
 
 [BlingFire](https://github.com/microsoft/BlingFire) - high speed text tokenization - for Ruby
 
-[![Build Status](https://travis-ci.org/ankane/blingfire.svg?branch=master)](https://travis-ci.org/ankane/blingfire)
+[![Build Status](https://travis-ci.org/ankane/blingfire.svg?branch=master)](https://travis-ci.org/ankane/blingfire) [![Build status](https://ci.appveyor.com/api/projects/status/3gyca4gsjw2w9ns1/branch/master?svg=true)](https://ci.appveyor.com/project/ankane/blingfire/branch/master)
 
 ## Installation
 
