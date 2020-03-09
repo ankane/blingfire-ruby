@@ -62,7 +62,7 @@ module BlingFire
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       ids = Fiddle::Pointer.malloc((max_len || text.size) * Fiddle::SIZEOF_INT)
       out_size = FFI.TextToIds(model, text, text.bytesize, ids, ids.size, unk_id)
-      check_status out_size
+      check_status out_size, ids
       ids[0, (max_len || out_size) * Fiddle::SIZEOF_INT].unpack("i!*")
     end
 
@@ -72,16 +72,16 @@ module BlingFire
 
     private
 
-    def check_status(ret)
-      raise Error, "Bad status" if ret == -1
+    def check_status(ret, ptr)
+      raise Error, "Not enough memory allocated" if ret == -1 || ret > ptr.size
     end
 
     def text_to(text, sep)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       # TODO allocate less, and try again if needed
-      out = Fiddle::Pointer.malloc(text.bytesize * 3)
+      out = Fiddle::Pointer.malloc(text.bytesize * 2)
       out_size = yield(text, out)
-      check_status out_size
+      check_status out_size, out
       encode_utf8(out.to_str(out_size - 1)).split(sep)
     end
 
