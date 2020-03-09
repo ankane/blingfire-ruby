@@ -39,7 +39,7 @@ module BlingFire
       out = Fiddle::Pointer.malloc(text.bytesize * 3)
       out_size = FFI.TextToWords(text, text.bytesize, out, out.size)
       check_status out_size
-      result(out, out_size, " ")
+      str_arr(out, out_size, " ")
     end
 
     def text_to_words_with_model(model, text)
@@ -47,7 +47,7 @@ module BlingFire
       out = Fiddle::Pointer.malloc(text.bytesize * 3)
       out_size = FFI.TextToWordsWithModel(text, text.bytesize, out, out.size, model)
       check_status out_size
-      result(out, out_size, " ")
+      str_arr(out, out_size, " ")
     end
 
     def text_to_sentences(text)
@@ -55,7 +55,7 @@ module BlingFire
       out = Fiddle::Pointer.malloc(text.bytesize * 3)
       out_size = FFI.TextToSentences(text, text.bytesize, out, out.size)
       check_status out_size
-      result(out, out_size, "\n")
+      str_arr(out, out_size, "\n")
     end
 
     def text_to_sentences_with_model(model, text)
@@ -63,7 +63,7 @@ module BlingFire
       out = Fiddle::Pointer.malloc(text.bytesize * 3)
       out_size = FFI.TextToSentencesWithModel(text, text.bytesize, out, out.size, model)
       check_status out_size
-      result(out, out_size, "\n")
+      str_arr(out, out_size, "\n")
     end
 
     def text_to_ids(model, text, max_len = nil, unk_id = 0)
@@ -84,7 +84,7 @@ module BlingFire
       raise Error, "Bad status" if ret == -1
     end
 
-    def result(out, out_size, sep)
+    def str_arr(out, out_size, sep)
       encode_utf8(out.to_str(out_size - 1)).split(sep)
     end
 
