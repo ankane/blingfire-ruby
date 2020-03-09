@@ -35,35 +35,27 @@ module BlingFire
     end
 
     def text_to_words(text)
-      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
-      out = Fiddle::Pointer.malloc(text.bytesize * 3)
-      out_size = FFI.TextToWords(text, text.bytesize, out, out.size)
-      check_status out_size
-      str_arr(out, out_size, " ")
+      text_to(text, " ") do |t, out|
+        FFI.TextToWords(t, t.bytesize, out, out.size)
+      end
     end
 
     def text_to_words_with_model(model, text)
-      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
-      out = Fiddle::Pointer.malloc(text.bytesize * 3)
-      out_size = FFI.TextToWordsWithModel(text, text.bytesize, out, out.size, model)
-      check_status out_size
-      str_arr(out, out_size, " ")
+      text_to(text, " ") do |t, out|
+        FFI.TextToWordsWithModel(t, t.bytesize, out, out.size, model)
+      end
     end
 
     def text_to_sentences(text)
-      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
-      out = Fiddle::Pointer.malloc(text.bytesize * 3)
-      out_size = FFI.TextToSentences(text, text.bytesize, out, out.size)
-      check_status out_size
-      str_arr(out, out_size, "\n")
+      text_to(text, "\n") do |t, out|
+        FFI.TextToSentences(t, t.bytesize, out, out.size)
+      end
     end
 
     def text_to_sentences_with_model(model, text)
-      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
-      out = Fiddle::Pointer.malloc(text.bytesize * 3)
-      out_size = FFI.TextToSentencesWithModel(text, text.bytesize, out, out.size, model)
-      check_status out_size
-      str_arr(out, out_size, "\n")
+      text_to(text, "\n") do |t, out|
+        FFI.TextToSentencesWithModel(t, t.bytesize, out, out.size, model)
+      end
     end
 
     def text_to_ids(model, text, max_len = nil, unk_id = 0)
@@ -84,7 +76,12 @@ module BlingFire
       raise Error, "Bad status" if ret == -1
     end
 
-    def str_arr(out, out_size, sep)
+    def text_to(text, sep)
+      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
+      # TODO allocate less, and try again if needed
+      out = Fiddle::Pointer.malloc(text.bytesize * 3)
+      out_size = yield(text, out)
+      check_status out_size
       encode_utf8(out.to_str(out_size - 1)).split(sep)
     end
 
