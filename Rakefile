@@ -8,6 +8,17 @@ Rake::TestTask.new do |t|
   t.warning = false
 end
 
+shared_libraries = %w(libblingfiretokdll.so libblingfiretokdll.dylib blingfiretokdll.dll)
+
+# ensure vendor files exist
+task :ensure_vendor do
+  shared_libraries.each do |file|
+    raise "Missing file: #{file}" unless File.exist?("vendor/#{file}")
+  end
+end
+
+Rake::Task["build"].enhance [:ensure_vendor]
+
 def download_file(file)
   require "open-uri"
 
