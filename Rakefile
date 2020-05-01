@@ -11,7 +11,7 @@ end
 def download_file(file)
   require "open-uri"
 
-  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-master/#{file}"
+  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.1/#{file}"
   puts "Downloading #{file}..."
   dest = "vendor/#{file}"
   File.binwrite(dest, URI.open(url).read)
@@ -31,11 +31,15 @@ namespace :vendor do
     download_file("blingfiretokdll.dll")
   end
 
+  task all: [:linux, :mac, :windows]
+end
+
+namespace :download do
   task :models do
     require "open-uri"
     require "fileutils"
 
-    ["wbd_chuni.bin", "bert_base_tok.bin"].each do |file|
+    ["wbd_chuni.bin", "bert_base_tok.bin", "xlnet.bin"].each do |file|
       url = "https://github.com/microsoft/BlingFire/raw/master/dist-pypi/blingfire/#{file}"
       puts "Downloading #{file}..."
       FileUtils.mkdir_p("test/support")
@@ -44,6 +48,4 @@ namespace :vendor do
       puts "Saved #{dest}"
     end
   end
-
-  task all: [:linux, :mac, :windows, :models]
 end

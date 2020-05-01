@@ -41,6 +41,8 @@ BlingFire comes with a default model that follows the tokenization logic of NLTK
 - [BERT Chinese](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_chinese.bin)
 - [BERT Multilingual Cased](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_multi_cased.bin)
 - [WBD](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/wbd_chuni.bin)
+- [XLNet](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlnet.bin) [master]
+- [XLNet No Norm](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlnet_nonorm.bin) [master]
 
 Load a model
 

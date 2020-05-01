@@ -55,6 +55,11 @@ class ModelTest < Minitest::Test
     assert_equal ["hello world!"], BlingFire.text_to_sentences("hello\nworld!")
   end
 
+  def test_xlnet
+    model = BlingFire.load_model("test/support/xlnet.bin")
+    assert_equal [24717, 185, 136, 0], model.text_to_ids("hello world!", 4, 100)
+  end
+
   def test_load_model_invalid
     error = assert_raises(BlingFire::Error) do
       BlingFire.load_model("invalid.bin")
