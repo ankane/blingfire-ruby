@@ -56,8 +56,9 @@ class ModelTest < Minitest::Test
   end
 
   def test_load_model_invalid
-    skip "terminates with uncaught exception"
-
-    BlingFire.load_model("invalid.bin")
+    error = assert_raises(BlingFire::Error) do
+      BlingFire.load_model("invalid.bin")
+    end
+    assert_equal "Model not found", error.message
   end
 end
