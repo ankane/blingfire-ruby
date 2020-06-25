@@ -1,3 +1,7 @@
+## 0.1.2 (unreleased)
+
+- Updated Bling Fire to 0.1.3
+
 ## 0.1.1 (2020-05-01)
 
 - Updated Bling Fire to 0.1.1

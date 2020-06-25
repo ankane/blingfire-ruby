@@ -40,9 +40,13 @@ BlingFire comes with a default model that follows the tokenization logic of NLTK
 - [BERT Base Cased](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_base_cased_tok.bin)
 - [BERT Chinese](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_chinese.bin)
 - [BERT Multilingual Cased](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_multi_cased.bin)
-- [WBD](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/wbd_chuni.bin)
+- [Laser 100k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/laser100k.bin)
+- [Laser 250k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/laser250k.bin)
+- [Laser 500k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/laser500k.bin)
+- [XLM Roberta](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlm_roberta_base.bin)
 - [XLNet](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlnet.bin)
 - [XLNet No Norm](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlnet_nonorm.bin)
+- [WBD](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/wbd_chuni.bin)
 
 Load a model
 

@@ -22,7 +22,7 @@ Rake::Task["build"].enhance [:ensure_vendor]
 def download_file(file)
   require "open-uri"
 
-  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.1/#{file}"
+  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.3/#{file}"
   puts "Downloading #{file}..."
   dest = "vendor/#{file}"
   File.binwrite(dest, URI.open(url).read)
