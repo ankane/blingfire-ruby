@@ -79,6 +79,6 @@ To get started with development:
 git clone https://github.com/ankane/blingfire.git
 cd blingfire
 bundle install
-bundle exec rake vendor:all
+bundle exec rake vendor:all download:models
 bundle exec rake test
 ```
