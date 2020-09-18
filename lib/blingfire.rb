@@ -135,6 +135,7 @@ module BlingFire
       offsets = []
 
       pos = 0
+      # TODO see if more efficient to store next_pos in variable
       text.each_char.with_index do |c, i|
         offsets << i if pos == byte_offsets[offsets.size]
         pos += c.bytesize
