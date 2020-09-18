@@ -1,3 +1,7 @@
+## 0.1.3 (unreleased)
+
+- Added `normalize_spaces` method
+
 ## 0.1.2 (2020-06-25)
 
 - Updated Bling Fire to 0.1.3

@@ -18,5 +18,6 @@ module BlingFire
     extern "int TextToIds(void* ModelPtr, char * pInUtf8Str, int InUtf8StrByteCount, int32_t * pIdsArr, int MaxIdsArrLength, int UnkId)"
     extern "int TextToSentences(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount)"
     extern "int TextToSentencesWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, void * hModel)"
+    extern "int NormalizeSpaces(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, int uSpace)"
   end
 end

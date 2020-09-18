@@ -70,6 +70,15 @@ module BlingFire
       FFI.FreeModel(model)
     end
 
+    def normalize_spaces(text)
+      u_space = 0x20
+      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
+      out = Fiddle::Pointer.malloc([text.bytesize * 1.5, 20].max)
+      out_size = FFI.NormalizeSpaces(text, text.bytesize, out, out.size, u_space)
+      check_status out_size, out
+      encode_utf8(out.to_str(out_size))
+    end
+
     private
 
     def check_status(ret, ptr)

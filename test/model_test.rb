@@ -55,6 +55,10 @@ class ModelTest < Minitest::Test
     assert_equal ["hello world!"], BlingFire.text_to_sentences("hello\nworld!")
   end
 
+  def test_normalize_spaces
+    assert_equal "hello world!", BlingFire.normalize_spaces("hello   world!")
+  end
+
   def test_xlnet
     model = BlingFire.load_model("test/support/xlnet.bin")
     assert_equal [24717, 185, 136, 0], model.text_to_ids("hello world!", 4, 100)
