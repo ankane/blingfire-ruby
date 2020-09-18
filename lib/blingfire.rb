@@ -134,8 +134,9 @@ module BlingFire
       byte_offsets = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
       offsets = []
 
-      pos = 0
+      # convert byte offsets to character offsets
       # TODO see if more efficient to store next_pos in variable
+      pos = 0
       text.each_char.with_index do |c, i|
         offsets << i if pos == byte_offsets[offsets.size]
         pos += c.bytesize
