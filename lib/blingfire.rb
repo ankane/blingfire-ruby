@@ -131,7 +131,15 @@ module BlingFire
       check_status out_size, out
 
       result = encode_utf8(out.to_str(out_size - 1)).split(sep)
-      offsets = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
+      byte_offsets = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
+      offsets = []
+
+      pos = 0
+      text.each_char.with_index do |c, i|
+        offsets << i if pos == byte_offsets[offsets.size]
+        pos += c.bytesize
+      end
+
       result.zip(offsets)
     end
 

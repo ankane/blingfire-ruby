@@ -18,6 +18,12 @@ class ModelTest < Minitest::Test
     assert_equal [["hello", 0], ["world", 6], ["!", 11]], output
   end
 
+  def test_text_to_words_with_offsets_utf8
+    text = "“ hello ”"
+    output = BlingFire.text_to_words_with_offsets(text)
+    assert_equal [["“", 0], ["hello", 2], ["”", 8]], output
+  end
+
   def test_text_to_words_with_model
     model = BlingFire.load_model("test/support/wbd_chuni.bin")
     text = "This is the Bling-Fire tokenizer. 2007年9月日历表_2007年9月农历阳历一览表-万年历"
