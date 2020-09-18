@@ -10,18 +10,35 @@ module BlingFire
       raise e
     end
 
+    # https://github.com/microsoft/BlingFire/blob/master/blingfiretools/blingfiretokdll/blingfiretokdll.cpp
+
+    # version
     extern "int GetBlingFireTokVersion()"
-    extern "void* LoadModel(char * pszLdbFileName)"
-    extern "int FreeModel(void* ModelPtr)"
-    extern "int TextToWordsWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, void * hModel)"
-    extern "int TextToWords(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount)"
-    extern "int TextToIds(void* ModelPtr, char * pInUtf8Str, int InUtf8StrByteCount, int32_t * pIdsArr, int MaxIdsArrLength, int UnkId)"
-    extern "int TextToSentences(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount)"
-    extern "int TextToSentencesWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, void * hModel)"
-    extern "int NormalizeSpaces(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, int uSpace)"
-    extern "int TextToWordsWithOffsetsWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount, void * hModel)"
-    extern "int TextToWordsWithOffsets(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount)"
+
+    # text to sentences
     extern "int TextToSentencesWithOffsetsWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount, void * hModel)"
     extern "int TextToSentencesWithOffsets(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount)"
+    extern "int TextToSentencesWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, void * hModel)"
+    extern "int TextToSentences(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount)"
+
+    # text to words
+    extern "int TextToWordsWithOffsetsWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount, void * hModel)"
+    extern "int TextToWordsWithOffsets(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount)"
+    extern "int TextToWordsWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, void * hModel)"
+    extern "int TextToWords(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount)"
+
+    # misc
+    extern "int NormalizeSpaces(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, int uSpace)"
+    extern "int TextToHashes(char * pInUtf8Str, int InUtf8StrByteCount, int32_t * pHashArr, int MaxHashArrLength, int wordNgrams, int bucketSize)"
+
+    # model
+    extern "void* LoadModel(char * pszLdbFileName)"
+
+    # text to ids
+    extern "int TextToIdsWithOffsets(void* ModelPtr, char * pInUtf8Str, int InUtf8StrByteCount, int32_t * pIdsArr, int * pStartOffsets, int * pEndOffsets, int MaxIdsArrLength, int UnkId)"
+    extern "int TextToIds(void* ModelPtr, char * pInUtf8Str, int InUtf8StrByteCount, int32_t * pIdsArr, int MaxIdsArrLength, int UnkId)"
+
+    # free model
+    extern "int FreeModel(void* ModelPtr)"
   end
 end
