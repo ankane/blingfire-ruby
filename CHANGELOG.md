@@ -1,5 +1,7 @@
 ## 0.1.3 (unreleased)
 
+- Added `text_to_words_with_offsets` method
+- Added `text_to_sentences_with_offsets` method
 - Added `normalize_spaces` method
 
 ## 0.1.2 (2020-06-25)

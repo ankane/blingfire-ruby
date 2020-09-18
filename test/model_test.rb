@@ -12,6 +12,12 @@ class ModelTest < Minitest::Test
     assert_equal Encoding::UTF_8, output[0].encoding
   end
 
+  def test_text_to_words_with_offsets
+    text = "hello world!"
+    output = BlingFire.text_to_words_with_offsets(text)
+    assert_equal [["hello", 0], ["world", 6], ["!", 11]], output
+  end
+
   def test_text_to_words_with_model
     model = BlingFire.load_model("test/support/wbd_chuni.bin")
     text = "This is the Bling-Fire tokenizer. 2007年9月日历表_2007年9月农历阳历一览表-万年历"
@@ -45,6 +51,12 @@ class ModelTest < Minitest::Test
 
     expected = ["In order to login to Café use pi@1.2.1.2.", "Split the data into train/test with a test size of 20% then use recurrent model (use LSTM or GRU)."]
     assert_equal expected, BlingFire::Model.new.text_to_sentences(text)
+  end
+
+  def test_text_to_sentences_with_offsets
+    text = "This is one sentence. Another sentence."
+    output = BlingFire.text_to_sentences_with_offsets(text)
+    assert_equal [["This is one sentence.", 0], ["Another sentence.", 22]], output
   end
 
   def test_text_to_words_multiple_spaces

@@ -19,5 +19,9 @@ module BlingFire
     extern "int TextToSentences(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount)"
     extern "int TextToSentencesWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, void * hModel)"
     extern "int NormalizeSpaces(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, int uSpace)"
+    extern "int TextToWordsWithOffsetsWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount, void * hModel)"
+    extern "int TextToWordsWithOffsets(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount)"
+    extern "int TextToSentencesWithOffsetsWithModel(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount, void * hModel)"
+    extern "int TextToSentencesWithOffsets(char * pInUtf8Str, int InUtf8StrByteCount, char * pOutUtf8Str, int * pStartOffsets, int * pEndOffsets, int MaxOutUtf8StrByteCount)"
   end
 end

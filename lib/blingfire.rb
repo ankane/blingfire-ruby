@@ -40,6 +40,12 @@ module BlingFire
       end
     end
 
+    def text_to_words_with_offsets(text)
+      text_to_with_offsets(text, " ") do |t, out, start_offsets, end_offsets|
+        FFI.TextToWordsWithOffsets(t, t.bytesize, out, start_offsets, end_offsets, out.size)
+      end
+    end
+
     def text_to_words_with_model(model, text)
       text_to(text, " ") do |t, out|
         FFI.TextToWordsWithModel(t, t.bytesize, out, out.size, model)
@@ -49,6 +55,12 @@ module BlingFire
     def text_to_sentences(text)
       text_to(text, "\n") do |t, out|
         FFI.TextToSentences(t, t.bytesize, out, out.size)
+      end
+    end
+
+    def text_to_sentences_with_offsets(text)
+      text_to_with_offsets(text, "\n") do |t, out, start_offsets, end_offsets|
+        FFI.TextToSentencesWithOffsets(t, t.bytesize, out, start_offsets, end_offsets, out.size)
       end
     end
 
@@ -92,6 +104,23 @@ module BlingFire
       out_size = yield(text, out)
       check_status out_size, out
       encode_utf8(out.to_str(out_size - 1)).split(sep)
+    end
+
+    def text_to_with_offsets(text, sep)
+      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
+      # TODO allocate less, and try again if needed
+      out = Fiddle::Pointer.malloc([text.bytesize * 1.5, 20].max)
+
+      start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size)
+      end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size)
+
+      out_size = yield(text, out, start_offsets, end_offsets)
+
+      check_status out_size, out
+
+      result = encode_utf8(out.to_str(out_size - 1)).split(sep)
+      offsets = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
+      result.zip(offsets)
     end
 
     def encode_utf8(text)
