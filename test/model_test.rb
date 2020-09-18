@@ -27,6 +27,9 @@ class ModelTest < Minitest::Test
 
     expected = "This is the Bling - Fire tokenizer . 2007年9月日历表_2007年9月农历阳历一览表 - 万年历"
     assert_equal expected, BlingFire.text_to_words(text).join(" ")
+
+    model.text_to_words_with_offsets(text)
+    model.text_to_sentences_with_offsets(text)
   end
 
   def test_text_to_ids

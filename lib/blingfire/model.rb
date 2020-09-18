@@ -16,11 +16,27 @@ module BlingFire
       end
     end
 
+    def text_to_words_with_offsets(text)
+      if @handle
+        BlingFire.text_to_words_with_offsets_with_model(@handle, text)
+      else
+        BlingFire.text_to_words_with_offsets(text)
+      end
+    end
+
     def text_to_sentences(text)
       if @handle
         BlingFire.text_to_sentences_with_model(@handle, text)
       else
         BlingFire.text_to_sentences(text)
+      end
+    end
+
+    def text_to_sentences_with_offsets(text)
+      if @handle
+        BlingFire.text_to_sentences_with_offsets_with_model(@handle, text)
+      else
+        BlingFire.text_to_sentences_with_offsets(text)
       end
     end
 

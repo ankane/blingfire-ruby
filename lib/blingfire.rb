@@ -40,15 +40,21 @@ module BlingFire
       end
     end
 
+    def text_to_words_with_model(model, text)
+      text_to(text, " ") do |t, out|
+        FFI.TextToWordsWithModel(t, t.bytesize, out, out.size, model)
+      end
+    end
+
     def text_to_words_with_offsets(text)
       text_to_with_offsets(text, " ") do |t, out, start_offsets, end_offsets|
         FFI.TextToWordsWithOffsets(t, t.bytesize, out, start_offsets, end_offsets, out.size)
       end
     end
 
-    def text_to_words_with_model(model, text)
-      text_to(text, " ") do |t, out|
-        FFI.TextToWordsWithModel(t, t.bytesize, out, out.size, model)
+    def text_to_words_with_offsets_with_model(model, text)
+      text_to_with_offsets(text, " ") do |t, out, start_offsets, end_offsets|
+        FFI.TextToWordsWithOffsetsWithModel(t, t.bytesize, out, start_offsets, end_offsets, out.size, model)
       end
     end
 
@@ -58,15 +64,21 @@ module BlingFire
       end
     end
 
+    def text_to_sentences_with_model(model, text)
+      text_to(text, "\n") do |t, out|
+        FFI.TextToSentencesWithModel(t, t.bytesize, out, out.size, model)
+      end
+    end
+
     def text_to_sentences_with_offsets(text)
       text_to_with_offsets(text, "\n") do |t, out, start_offsets, end_offsets|
         FFI.TextToSentencesWithOffsets(t, t.bytesize, out, start_offsets, end_offsets, out.size)
       end
     end
 
-    def text_to_sentences_with_model(model, text)
-      text_to(text, "\n") do |t, out|
-        FFI.TextToSentencesWithModel(t, t.bytesize, out, out.size, model)
+    def text_to_sentences_with_offsets_with_model(model, text)
+      text_to_with_offsets(text, "\n") do |t, out, start_offsets, end_offsets|
+        FFI.TextToSentencesWithOffsetsWithModel(t, t.bytesize, out, start_offsets, end_offsets, out.size, model)
       end
     end
 
