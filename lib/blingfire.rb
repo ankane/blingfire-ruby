@@ -112,7 +112,7 @@ module BlingFire
     def text_to(text, sep)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       # TODO allocate less, and try again if needed
-      out = Fiddle::Pointer.malloc([text.bytesize * 1.5, 20].max)
+      out = Fiddle::Pointer.malloc([text.bytesize * 3, 20].max)
       out_size = yield(text, out)
       check_status out_size, out
       encode_utf8(out.to_str(out_size - 1)).split(sep)
@@ -121,7 +121,7 @@ module BlingFire
     def text_to_with_offsets(text, sep)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       # TODO allocate less, and try again if needed
-      out = Fiddle::Pointer.malloc([text.bytesize * 1.5, 20].max)
+      out = Fiddle::Pointer.malloc([text.bytesize * 3, 20].max)
 
       start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size)
       end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size)
@@ -138,7 +138,9 @@ module BlingFire
       # TODO see if more efficient to store next_pos in variable
       pos = 0
       text.each_char.with_index do |c, i|
-        offsets << i if pos == byte_offsets[offsets.size]
+        while pos == byte_offsets[offsets.size]
+          offsets << i
+        end
         pos += c.bytesize
       end
 
