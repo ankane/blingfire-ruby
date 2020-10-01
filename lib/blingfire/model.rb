@@ -48,6 +48,14 @@ module BlingFire
       end
     end
 
+    def text_to_ids_with_offsets(text, max_len = nil, unk_id = 0)
+      if @handle
+        BlingFire.text_to_ids_with_offsets(@handle, text, max_len, unk_id)
+      else
+        raise "Not implemented"
+      end
+    end
+
     def to_ptr
       @handle
     end

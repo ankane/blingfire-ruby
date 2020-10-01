@@ -90,6 +90,22 @@ module BlingFire
       ids[0, (max_len || out_size) * Fiddle::SIZEOF_INT].unpack("i!*")
     end
 
+    def text_to_ids_with_offsets(model, text, max_len = nil, unk_id = 0)
+      text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
+      ids = Fiddle::Pointer.malloc((max_len || text.size) * Fiddle::SIZEOF_INT)
+
+      start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size)
+      end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size)
+
+      out_size = FFI.TextToIdsWithOffsets(model, text, text.bytesize, ids, start_offsets, end_offsets, ids.size, unk_id)
+
+      check_status out_size, ids
+
+      result = ids[0, (max_len || out_size) * Fiddle::SIZEOF_INT].unpack("i!*")
+      offsets = unpack_offsets(start_offsets, result, text)
+      result.zip(offsets)
+    end
+
     def free_model(model)
       FFI.FreeModel(model)
     end
@@ -131,6 +147,15 @@ module BlingFire
       check_status out_size, out
 
       result = encode_utf8(out.to_str(out_size - 1)).split(sep)
+      offsets = unpack_offsets(start_offsets, result, text)
+      result.zip(offsets)
+    end
+
+    def encode_utf8(text)
+      text.force_encoding(Encoding::UTF_8)
+    end
+
+    def unpack_offsets(start_offsets, result, text)
       byte_offsets = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
       offsets = []
 
@@ -144,11 +169,7 @@ module BlingFire
         pos += c.bytesize
       end
 
-      result.zip(offsets)
-    end
-
-    def encode_utf8(text)
-      text.force_encoding(Encoding::UTF_8)
+      offsets
     end
   end
 end

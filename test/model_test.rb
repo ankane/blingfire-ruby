@@ -52,6 +52,13 @@ class ModelTest < Minitest::Test
     assert_equal expected, model.text_to_ids(s)
   end
 
+  def test_text_to_ids_with_offsets
+    model = BlingFire.load_model("test/support/bert_base_tok.bin")
+    text = "hello world!"
+    output = model.text_to_ids_with_offsets(text)
+    assert_equal [[7592, 0], [2088, 6], [999, 11]], output
+  end
+
   def test_text_to_sentences
     text = "In order to login to Café use pi@1.2.1.2. Split the data into train/test with a test size of 20% then use recurrent model (use LSTM or GRU)."
 
