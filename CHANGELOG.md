@@ -1,4 +1,4 @@
-## 0.1.3 (unreleased)
+## 0.1.3 (2020-10-01)
 
 - Added `text_to_words_with_offsets` method
 - Added `text_to_sentences_with_offsets` method
