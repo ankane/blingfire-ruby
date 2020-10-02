@@ -32,6 +32,18 @@ Tokenize sentences
 model.text_to_sentences(text)
 ```
 
+Get offsets for words
+
+```ruby
+words, start_offsets, end_offsets = model.text_to_words_with_offsets(text)
+```
+
+Get offsets for sentences
+
+```ruby
+sentences, start_offsets, end_offsets = model.text_to_sentences_with_offsets(text)
+```
+
 ## Pre-trained Models
 
 BlingFire comes with a default model that follows the tokenization logic of NLTK with a few changes. You can also download other models:
@@ -58,6 +70,12 @@ Convert text to ids
 
 ```ruby
 model.text_to_ids(text)
+```
+
+Get offsets for ids
+
+```ruby
+ids, start_offsets, end_offsets = model.text_to_ids_with_offsets(text)
 ```
 
 ## History

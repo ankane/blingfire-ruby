@@ -15,13 +15,13 @@ class ModelTest < Minitest::Test
   def test_text_to_words_with_offsets
     text = "hello world!"
     output = BlingFire.text_to_words_with_offsets(text)
-    assert_equal [["hello", 0], ["world", 6], ["!", 11]], output
+    assert_equal [["hello", "world", "!"], [0, 6, 11], [5, 11, 12]], output
   end
 
   def test_text_to_words_with_offsets_utf8
     text = "“ hello ”"
     output = BlingFire.text_to_words_with_offsets(text)
-    assert_equal [["“", 0], ["hello", 2], ["”", 8]], output
+    assert_equal [["“", "hello", "”"], [0, 2, 8], [1, 7, 9]], output
   end
 
   def test_text_to_words_with_model
@@ -56,7 +56,7 @@ class ModelTest < Minitest::Test
     model = BlingFire.load_model("test/support/bert_base_tok.bin")
     text = "hello world!"
     output = model.text_to_ids_with_offsets(text)
-    assert_equal [[7592, 0], [2088, 6], [999, 11]], output
+    assert_equal [[7592, 2088, 999], [0, 6, 11], [5, 11, 12]], output
   end
 
   def test_text_to_sentences
@@ -72,7 +72,7 @@ class ModelTest < Minitest::Test
   def test_text_to_sentences_with_offsets
     text = "This is one sentence. Another sentence."
     output = BlingFire.text_to_sentences_with_offsets(text)
-    assert_equal [["This is one sentence.", 0], ["Another sentence.", 22]], output
+    assert_equal [["This is one sentence.", "Another sentence."], [0, 22], [21, 39]], output
   end
 
   def test_text_to_words_multiple_spaces

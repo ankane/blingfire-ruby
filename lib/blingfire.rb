@@ -102,8 +102,7 @@ module BlingFire
       check_status out_size, ids
 
       result = ids[0, (max_len || out_size) * Fiddle::SIZEOF_INT].unpack("i!*")
-      offsets = unpack_offsets(start_offsets, result, text)
-      result.zip(offsets)
+      [result].concat(unpack_offsets(start_offsets, end_offsets, result, text))
     end
 
     def free_model(model)
@@ -147,29 +146,33 @@ module BlingFire
       check_status out_size, out
 
       result = encode_utf8(out.to_str(out_size - 1)).split(sep)
-      offsets = unpack_offsets(start_offsets, result, text)
-      result.zip(offsets)
+      [result].concat(unpack_offsets(start_offsets, end_offsets, result, text))
     end
 
     def encode_utf8(text)
       text.force_encoding(Encoding::UTF_8)
     end
 
-    def unpack_offsets(start_offsets, result, text)
-      byte_offsets = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
-      offsets = []
+    def unpack_offsets(start_offsets, end_offsets, result, text)
+      start_bytes = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
+      end_bytes = end_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
+      starts = []
+      ends = []
 
       # convert byte offsets to character offsets
       # TODO see if more efficient to store next_pos in variable
       pos = 0
       text.each_char.with_index do |c, i|
-        while pos == byte_offsets[offsets.size]
-          offsets << i
+        while pos == start_bytes[starts.size]
+          starts << i
         end
         pos += c.bytesize
+        while pos - 1 == end_bytes[ends.size]
+          ends << i + 1
+        end
       end
 
-      offsets
+      [starts, ends]
     end
   end
 end
