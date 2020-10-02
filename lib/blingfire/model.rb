@@ -1,6 +1,7 @@
 module BlingFire
   class Model
     def initialize(path = nil)
+      @handle = nil
       if path
         raise Error, "Model not found" unless File.exist?(path)
         @handle = FFI.LoadModel(path)
