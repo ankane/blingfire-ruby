@@ -14,6 +14,8 @@ module BlingFire
   lib_name =
     if Gem.win_platform?
       "blingfiretokdll.dll"
+    elsif RbConfig::CONFIG["arch"] =~ /arm64-darwin/i
+      "libblingfiretokdll.arm64.dylib"
     elsif RbConfig::CONFIG["host_os"] =~ /darwin/i
       "libblingfiretokdll.dylib"
     else

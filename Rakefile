@@ -35,6 +35,7 @@ namespace :vendor do
 
   task :mac do
     download_file("libblingfiretokdll.dylib")
+    download_file("libblingfiretokdll.arm64.dylib")
   end
 
   task :windows do

@@ -1,3 +1,7 @@
+## 0.1.4 (unreleased)
+
+- Added ARM shared library for Mac
+
 ## 0.1.3 (2020-10-01)
 
 - Added `text_to_words_with_offsets` method
