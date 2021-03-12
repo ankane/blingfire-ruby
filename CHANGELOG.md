@@ -1,3 +1,7 @@
+## 0.1.5 (unreleased)
+
+- Added ARM shared library for Linux
+
 ## 0.1.4 (2020-12-28)
 
 - Added ARM shared library for Mac
