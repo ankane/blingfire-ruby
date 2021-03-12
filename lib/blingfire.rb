@@ -21,7 +21,7 @@ module BlingFire
         "libblingfiretokdll.dylib"
       end
     else
-      if RbConfig::CONFIG["host_cpu"] =~ /arm/i
+      if RbConfig::CONFIG["host_cpu"] =~ /aarch64/i
         "libblingfiretokdll.arm64.so"
       else
         "libblingfiretokdll.so"
