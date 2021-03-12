@@ -14,12 +14,18 @@ module BlingFire
   lib_name =
     if Gem.win_platform?
       "blingfiretokdll.dll"
-    elsif RbConfig::CONFIG["arch"] =~ /arm64-darwin/i
-      "libblingfiretokdll.arm64.dylib"
     elsif RbConfig::CONFIG["host_os"] =~ /darwin/i
-      "libblingfiretokdll.dylib"
+      if RbConfig::CONFIG["host_cpu"] =~ /arm/i
+        "libblingfiretokdll.arm64.dylib"
+      else
+        "libblingfiretokdll.dylib"
+      end
     else
-      "libblingfiretokdll.so"
+      if RbConfig::CONFIG["host_cpu"] =~ /arm/i
+        "libblingfiretokdll.arm64.so"
+      else
+        "libblingfiretokdll.so"
+      end
     end
   vendor_lib = File.expand_path("../vendor/#{lib_name}", __dir__)
   self.ffi_lib = [vendor_lib]
