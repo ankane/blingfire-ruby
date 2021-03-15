@@ -21,7 +21,7 @@ Rake::Task["build"].enhance [:ensure_vendor]
 def download_file(file, sha256)
   require "open-uri"
 
-  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.3/#{file}"
+  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.5/#{file}"
   puts "Downloading #{file}..."
   contents = URI.open(url).read
 
@@ -35,17 +35,17 @@ end
 
 namespace :vendor do
   task :linux do
-    download_file("libblingfiretokdll.so", "b1d557405ec061b412e725b94141086d7120adec7a2291fde61d635557e62272")
-    download_file("libblingfiretokdll.arm64.so", "bbed6967b00e24ee533205a6b7dea4d297c8cdabfa4aad2e31fe11212b474377")
+    download_file("libblingfiretokdll.so", "9aa1d3781a413968a8b56d7bd683f84b534bfac768cad73de2735d5121107018")
+    download_file("libblingfiretokdll.arm64.so", "6ecc1acee622806545283a2d671554477c3a583781806194d17668d41ed67d35")
   end
 
   task :mac do
-    download_file("libblingfiretokdll.dylib", "51fe6ab0ee0d4f9de7531be9ea36d5c44557f8fe29539413287dd2b9e11b863c")
-    download_file("libblingfiretokdll.arm64.dylib", "22e12e3f57aa2205745cea27469a0ed5a090255256914be2c58cf527fbd8c10a")
+    download_file("libblingfiretokdll.dylib", "ef299a3f52fdcbb1628a6511073b98285a3977ebd5c926bf66230162f74e17be")
+    download_file("libblingfiretokdll.arm64.dylib", "bba3534f2ad8171214f0a23fc73f5332587d15ab1032ab9a58705e3eacad05c4")
   end
 
   task :windows do
-    download_file("blingfiretokdll.dll", "155ada310a0dbbb3f3646e7b3c5d4f366eb933a2efa957c4752e47da72997700")
+    download_file("blingfiretokdll.dll", "6ed448dec31f33417957488fd9ef522210007fa81232804c33287a1721ad9a2f")
   end
 
   task all: [:linux, :mac, :windows]

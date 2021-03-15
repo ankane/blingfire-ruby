@@ -46,15 +46,21 @@ sentences, start_offsets, end_offsets = model.text_to_sentences_with_offsets(tex
 
 ## Pre-trained Models
 
-BlingFire comes with a default model that follows the tokenization logic of NLTK with a few changes. You can also download other models:
+Bling Fire comes with a default model that follows the tokenization logic of NLTK with a few changes. You can also download other models:
 
 - [BERT Base](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_base_tok.bin)
 - [BERT Base Cased](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_base_cased_tok.bin)
 - [BERT Chinese](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_chinese.bin)
 - [BERT Multilingual Cased](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/bert_multi_cased.bin)
+- [GPT-2](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/gpt2.bin)
 - [Laser 100k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/laser100k.bin)
 - [Laser 250k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/laser250k.bin)
 - [Laser 500k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/laser500k.bin)
+- [RoBERTa](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/roberta.bin)
+- [Syllab](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/syllab.bin)
+- [URI 100k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/uri100k.bin)
+- [URI 250k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/uri250k.bin)
+- [URI 500k](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/uri500k.bin)
 - [XLM Roberta](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlm_roberta_base.bin)
 - [XLNet](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlnet.bin)
 - [XLNet No Norm](https://github.com/microsoft/BlingFire/blob/master/dist-pypi/blingfire/xlnet_nonorm.bin)
