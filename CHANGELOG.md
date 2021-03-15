@@ -1,4 +1,4 @@
-## 0.1.5 (unreleased)
+## 0.1.5 (2021-03-14)
 
 - Updated Bling Fire to 0.1.5
 - Added ARM shared library for Linux
