@@ -95,11 +95,25 @@ class ModelTest < Minitest::Test
   def test_roberta
     model = BlingFire.load_model("test/support/roberta.bin")
     assert_equal [152, 16, 10, 1296], model.text_to_ids("This is a test", 4, 100)
+
+    ids, start_offsets, end_offsets = model.text_to_ids_with_offsets("This is a test", 4, 100)
+    assert_equal [152, 16, 10, 1296], ids
+    # TODO fix offsets
+    # keep consistent with 0.1.5 for now
+    assert_equal [0, 4, 7, 9], start_offsets
+    assert_equal [4, 7, 9, 14], end_offsets
   end
 
   def test_roberta_no_prefix
     model = BlingFire.load_model("test/support/roberta.bin", prefix: false)
     assert_equal [713, 16, 10, 1296], model.text_to_ids("This is a test", 4, 100)
+
+    ids, start_offsets, end_offsets = model.text_to_ids_with_offsets("This is a test", 4, 100)
+    assert_equal [713, 16, 10, 1296], ids
+    # TODO fix offsets
+    # keep consistent with 0.1.5 for now
+    assert_equal [0, 4, 7, 9], start_offsets
+    assert_equal [4, 7, 9, 14], end_offsets
   end
 
   def test_load_model_invalid

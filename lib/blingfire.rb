@@ -177,7 +177,7 @@ module BlingFire
       # TODO see if more efficient to store next_pos in variable
       pos = 0
       text.each_char.with_index do |c, i|
-        while pos == start_bytes[starts.size]
+        while pos == start_bytes[starts.size] || start_bytes[starts.size] == -1
           starts << i
         end
         pos += c.bytesize
