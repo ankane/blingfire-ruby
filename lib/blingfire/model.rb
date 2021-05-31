@@ -1,11 +1,15 @@
 module BlingFire
   class Model
-    def initialize(path = nil)
+    def initialize(path = nil, prefix: nil)
       @handle = nil
       if path
         raise Error, "Model not found" unless File.exist?(path)
         @handle = FFI.LoadModel(path)
         ObjectSpace.define_finalizer(self, self.class.finalize(@handle))
+
+        BlingFire.change_settings_dummy_prefix(@handle, prefix) unless prefix.nil?
+      else
+        raise Error, "prefix option requires path" unless prefix.nil?
       end
     end
 

@@ -10,6 +10,8 @@ module BlingFire
       raise e
     end
 
+    typealias "bool", "char"
+
     # https://github.com/microsoft/BlingFire/blob/master/blingfiretools/blingfiretokdll/blingfiretokdll.cpp
 
     # version
@@ -40,5 +42,8 @@ module BlingFire
 
     # free model
     extern "int FreeModel(void* ModelPtr)"
+
+    # prefix
+    extern "int SetNoDummyPrefix(void* ModelPtr, bool fNoDummyPrefix)"
   end
 end

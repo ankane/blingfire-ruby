@@ -21,7 +21,7 @@ Rake::Task["build"].enhance [:ensure_vendor]
 def download_file(file, sha256)
   require "open-uri"
 
-  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.5/#{file}"
+  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.7/#{file}"
   puts "Downloading #{file}..."
   contents = URI.open(url).read
 
@@ -35,17 +35,17 @@ end
 
 namespace :vendor do
   task :linux do
-    download_file("libblingfiretokdll.so", "9aa1d3781a413968a8b56d7bd683f84b534bfac768cad73de2735d5121107018")
-    download_file("libblingfiretokdll.arm64.so", "6ecc1acee622806545283a2d671554477c3a583781806194d17668d41ed67d35")
+    download_file("libblingfiretokdll.so", "2a37cfeef4b16ee37b5f54ad4c497c64aa7ae1dc3b9427eb3ba32921dafeb5fb")
+    download_file("libblingfiretokdll.arm64.so", "fc141c270a3cdb378a8e586d6ad6bed8f7b694b8f371adfcce58de7ca20eb15f")
   end
 
   task :mac do
-    download_file("libblingfiretokdll.dylib", "ef299a3f52fdcbb1628a6511073b98285a3977ebd5c926bf66230162f74e17be")
-    download_file("libblingfiretokdll.arm64.dylib", "bba3534f2ad8171214f0a23fc73f5332587d15ab1032ab9a58705e3eacad05c4")
+    download_file("libblingfiretokdll.dylib", "c8c28d815831c553cc21ca8ff279059e69a2440cc2843d74dda5223578187ee3")
+    download_file("libblingfiretokdll.arm64.dylib", "49fae9d5fe7c2dd13961fcd05fdc3e619f43d3962a80695d507513b196c6766f")
   end
 
   task :windows do
-    download_file("blingfiretokdll.dll", "6ed448dec31f33417957488fd9ef522210007fa81232804c33287a1721ad9a2f")
+    download_file("blingfiretokdll.dll", "28b1a24988b2175c760d4b551fd6ad2bfc4c7dad4df5522e87722007090567f9")
   end
 
   task all: [:linux, :mac, :windows]
@@ -66,7 +66,7 @@ namespace :download do
     require "open-uri"
     require "fileutils"
 
-    ["wbd_chuni.bin", "bert_base_tok.bin", "xlnet.bin"].each do |file|
+    ["wbd_chuni.bin", "bert_base_tok.bin", "xlnet.bin", "roberta.bin"].each do |file|
       url = "https://github.com/microsoft/BlingFire/raw/master/dist-pypi/blingfire/#{file}"
       puts "Downloading #{file}..."
       FileUtils.mkdir_p("test/support")

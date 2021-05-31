@@ -76,6 +76,12 @@ Get offsets for ids
 ids, start_offsets, end_offsets = model.text_to_ids_with_offsets(text)
 ```
 
+Disable prefix space
+
+```ruby
+model = BlingFire.load_model("roberta.bin", prefix: false)
+```
+
 ## History
 
 View the [changelog](https://github.com/ankane/blingfire/blob/master/CHANGELOG.md)

@@ -38,8 +38,8 @@ module BlingFire
       FFI.GetBlingFireTokVersion
     end
 
-    def load_model(path)
-      Model.new(path)
+    def load_model(path, **options)
+      Model.new(path, **options)
     end
 
     def text_to_words(text)
@@ -124,6 +124,12 @@ module BlingFire
       out_size = FFI.NormalizeSpaces(text, text.bytesize, out, out.size, u_space)
       check_status out_size, out
       encode_utf8(out.to_str(out_size))
+    end
+
+    def change_settings_dummy_prefix(model, value)
+      # use opposite of value
+      ret = FFI.SetNoDummyPrefix(model, value ? 0 : 1)
+      raise Error, "Bad status: #{ret}" if ret != 1
     end
 
     private

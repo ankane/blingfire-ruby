@@ -92,6 +92,16 @@ class ModelTest < Minitest::Test
     assert_equal [24717, 185, 136, 0], model.text_to_ids("hello world!", 4, 100)
   end
 
+  def test_roberta
+    model = BlingFire.load_model("test/support/roberta.bin")
+    assert_equal [152, 16, 10, 1296], model.text_to_ids("This is a test", 4, 100)
+  end
+
+  def test_roberta_no_prefix
+    model = BlingFire.load_model("test/support/roberta.bin", prefix: false)
+    assert_equal [713, 16, 10, 1296], model.text_to_ids("This is a test", 4, 100)
+  end
+
   def test_load_model_invalid
     error = assert_raises(BlingFire::Error) do
       BlingFire.load_model("invalid.bin")

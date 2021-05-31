@@ -1,3 +1,7 @@
+## 0.1.6 (unreleased)
+
+- Added `prefix` option
+
 ## 0.1.5 (2021-03-14)
 
 - Updated Bling Fire to 0.1.5
