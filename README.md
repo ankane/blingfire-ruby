@@ -82,7 +82,7 @@ Disable prefix space
 model = BlingFire.load_model("roberta.bin", prefix: false)
 ```
 
-## Ids to Text [unreleased]
+## Ids to Text [experimental]
 
 Load a model
 
