@@ -61,9 +61,9 @@ module BlingFire
       end
     end
 
-    def ids_to_text(ids, skip_special_tokens = true, output_buffer_size = nil)
+    def ids_to_text(ids, skip_special_tokens: true, output_buffer_size: nil)
       if @handle
-        BlingFire.ids_to_text(@handle, ids, skip_special_tokens, output_buffer_size)
+        BlingFire.ids_to_text(@handle, ids, skip_special_tokens: skip_special_tokens, output_buffer_size: output_buffer_size)
       else
         raise "Not implemented"
       end

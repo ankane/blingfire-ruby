@@ -113,7 +113,7 @@ module BlingFire
       [result].concat(unpack_offsets(start_offsets, end_offsets, result, text))
     end
 
-    def ids_to_text(model, ids, skip_special_tokens = true, output_buffer_size = nil)
+    def ids_to_text(model, ids, skip_special_tokens: true, output_buffer_size: nil)
       output_buffer_size ||= ids.size * 32
       c_ids = Fiddle::Pointer[ids.pack("i*")]
       out = Fiddle::Pointer.malloc(output_buffer_size)
