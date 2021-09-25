@@ -113,6 +113,15 @@ module BlingFire
       [result].concat(unpack_offsets(start_offsets, end_offsets, result, text))
     end
 
+    def ids_to_text(model, ids, skip_special_tokens = true, output_buffer_size = nil)
+      output_buffer_size ||= ids.size * 32
+      c_ids = Fiddle::Pointer[ids.pack("i*")]
+      out = Fiddle::Pointer.malloc(output_buffer_size)
+      out_size = FFI.IdsToText(model, c_ids, ids.size, out, output_buffer_size, skip_special_tokens ? 1 : 0)
+      check_status out_size, out
+      encode_utf8(out.to_str(out_size - 1))
+    end
+
     def free_model(model)
       FFI.FreeModel(model)
     end

@@ -21,7 +21,7 @@ Rake::Task["build"].enhance [:ensure_vendor]
 def download_file(file, sha256)
   require "open-uri"
 
-  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.7/#{file}"
+  url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.8/#{file}"
   puts "Downloading #{file}..."
   contents = URI.open(url).read
 
@@ -35,17 +35,17 @@ end
 
 namespace :vendor do
   task :linux do
-    download_file("libblingfiretokdll.so", "2a37cfeef4b16ee37b5f54ad4c497c64aa7ae1dc3b9427eb3ba32921dafeb5fb")
-    download_file("libblingfiretokdll.arm64.so", "fc141c270a3cdb378a8e586d6ad6bed8f7b694b8f371adfcce58de7ca20eb15f")
+    download_file("libblingfiretokdll.so", "6e06cddbbb76f615b16e2feff3ab30f64f7132d9a9da59630ec713a11573934e")
+    download_file("libblingfiretokdll.arm64.so", "65e337cc612282c983b75717f91c50bcaba26cb7b6697cfce18a1045a8accf1f")
   end
 
   task :mac do
-    download_file("libblingfiretokdll.dylib", "c8c28d815831c553cc21ca8ff279059e69a2440cc2843d74dda5223578187ee3")
-    download_file("libblingfiretokdll.arm64.dylib", "49fae9d5fe7c2dd13961fcd05fdc3e619f43d3962a80695d507513b196c6766f")
+    download_file("libblingfiretokdll.dylib", "e623b2d3d4b12be5533a647b21324fd05bbfd7dfc5918e0f82b5283f5dd34827")
+    download_file("libblingfiretokdll.arm64.dylib", "dec6015e1b186f9d023f87bb530f16406520609c2b1dc28067cf9ed4327ecf20")
   end
 
   task :windows do
-    download_file("blingfiretokdll.dll", "28b1a24988b2175c760d4b551fd6ad2bfc4c7dad4df5522e87722007090567f9")
+    download_file("blingfiretokdll.dll", "939e716ac90e78a53a2b7d2323c464795e8138ba64a72712c363c9cc02c6f3a6")
   end
 
   task all: [:linux, :mac, :windows]
@@ -66,7 +66,7 @@ namespace :download do
     require "open-uri"
     require "fileutils"
 
-    ["wbd_chuni.bin", "bert_base_tok.bin", "xlnet.bin", "roberta.bin"].each do |file|
+    ["wbd_chuni.bin", "bert_base_tok.bin", "xlnet.bin", "roberta.bin", "bert_base_cased_tok.i2w"].each do |file|
       url = "https://github.com/microsoft/BlingFire/raw/master/dist-pypi/blingfire/#{file}"
       puts "Downloading #{file}..."
       FileUtils.mkdir_p("test/support")

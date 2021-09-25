@@ -82,6 +82,20 @@ Disable prefix space
 model = BlingFire.load_model("roberta.bin", prefix: false)
 ```
 
+## Ids to Text [unreleased]
+
+Load a model
+
+```ruby
+model = BlingFire.load_model("bert_base_tok.i2w")
+```
+
+Convert ids to text
+
+```ruby
+model.ids_to_text(ids)
+```
+
 ## History
 
 View the [changelog](https://github.com/ankane/blingfire/blob/master/CHANGELOG.md)

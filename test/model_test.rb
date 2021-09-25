@@ -83,6 +83,11 @@ class ModelTest < Minitest::Test
     assert_equal ["hello world!"], BlingFire.text_to_sentences("hello\nworld!")
   end
 
+  def test_ids_to_text
+    model = BlingFire.load_model("test/support/bert_base_cased_tok.i2w")
+    assert_equal "This is a test", model.ids_to_text([1188, 1110, 170, 2774])
+  end
+
   def test_normalize_spaces
     assert_equal "hello world!", BlingFire.normalize_spaces("hello   world!")
   end

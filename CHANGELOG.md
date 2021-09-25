@@ -1,3 +1,8 @@
+## 0.1.7 (unreleased)
+
+- Updated Bling Fire to 0.1.8
+- Added `ids_to_text` method
+
 ## 0.1.6 (2021-06-07)
 
 - Updated Bling Fire to 0.1.7

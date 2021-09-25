@@ -45,5 +45,8 @@ module BlingFire
 
     # prefix
     extern "int SetNoDummyPrefix(void* ModelPtr, bool fNoDummyPrefix)"
+
+    # ids to text
+    extern "int IdsToText(void* ModelPtr, int32_t * pIdsArr, int IdsCount, char * pOutUtf8Str, int MaxOutUtf8StrByteCount, bool SkipSpecialTokens)"
   end
 end
