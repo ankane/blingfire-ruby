@@ -1,8 +1,8 @@
-# Bling Fire
+# Bling Fire Ruby
 
 [Bling Fire](https://github.com/microsoft/BlingFire) - high speed text tokenization - for Ruby
 
-[![Build Status](https://github.com/ankane/blingfire/workflows/build/badge.svg?branch=master)](https://github.com/ankane/blingfire/actions)
+[![Build Status](https://github.com/ankane/blingfire-ruby/workflows/build/badge.svg?branch=master)](https://github.com/ankane/blingfire-ruby/actions)
 
 ## Installation
 
@@ -98,22 +98,22 @@ model.ids_to_text(ids)
 
 ## History
 
-View the [changelog](https://github.com/ankane/blingfire/blob/master/CHANGELOG.md)
+View the [changelog](https://github.com/ankane/blingfire-ruby/blob/master/CHANGELOG.md)
 
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
-- [Report bugs](https://github.com/ankane/blingfire/issues)
-- Fix bugs and [submit pull requests](https://github.com/ankane/blingfire/pulls)
+- [Report bugs](https://github.com/ankane/blingfire-ruby/issues)
+- Fix bugs and [submit pull requests](https://github.com/ankane/blingfire-ruby/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
 
 To get started with development:
 
 ```sh
-git clone https://github.com/ankane/blingfire.git
-cd blingfire
+git clone https://github.com/ankane/blingfire-ruby.git
+cd blingfire-ruby
 bundle install
 bundle exec rake vendor:all download:models
 bundle exec rake test

@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "blingfire"
   spec.version       = BlingFire::VERSION
   spec.summary       = "High speed text tokenization for Ruby"
-  spec.homepage      = "https://github.com/ankane/blingfire"
+  spec.homepage      = "https://github.com/ankane/blingfire-ruby"
   spec.license       = "MIT"
 
   spec.author        = "Andrew Kane"
