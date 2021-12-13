@@ -1,3 +1,7 @@
+## 0.1.8 (unreleased)
+
+- Improved ARM detection
+
 ## 0.1.7 (2021-09-24)
 
 - Updated Bling Fire to 0.1.8

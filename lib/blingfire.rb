@@ -15,13 +15,13 @@ module BlingFire
     if Gem.win_platform?
       "blingfiretokdll.dll"
     elsif RbConfig::CONFIG["host_os"] =~ /darwin/i
-      if RbConfig::CONFIG["host_cpu"] =~ /arm/i
+      if RbConfig::CONFIG["host_cpu"] =~ /arm|aarch64/i
         "libblingfiretokdll.arm64.dylib"
       else
         "libblingfiretokdll.dylib"
       end
     else
-      if RbConfig::CONFIG["host_cpu"] =~ /aarch64/i
+      if RbConfig::CONFIG["host_cpu"] =~ /arm|aarch64/i
         "libblingfiretokdll.arm64.so"
       else
         "libblingfiretokdll.so"
