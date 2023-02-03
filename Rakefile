@@ -23,7 +23,7 @@ def download_file(file, sha256)
 
   url = "https://github.com/ankane/ml-builds/releases/download/blingfire-0.1.8/#{file}"
   puts "Downloading #{file}..."
-  contents = URI.open(url).read
+  contents = URI.parse(url).read
 
   computed_sha256 = Digest::SHA256.hexdigest(contents)
   raise "Bad hash: #{computed_sha256}" if computed_sha256 != sha256
@@ -71,7 +71,7 @@ namespace :download do
       puts "Downloading #{file}..."
       FileUtils.mkdir_p("test/support")
       dest = "test/support/#{file}"
-      File.binwrite(dest, URI.open(url).read)
+      File.binwrite(dest, URI.parse(url).read)
       puts "Saved #{dest}"
     end
   end
