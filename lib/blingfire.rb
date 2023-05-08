@@ -2,8 +2,8 @@
 require "fiddle/import"
 
 # modules
-require "blingfire/model"
-require "blingfire/version"
+require_relative "blingfire/model"
+require_relative "blingfire/version"
 
 module BlingFire
   class Error < StandardError; end
