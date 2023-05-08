@@ -1,3 +1,7 @@
+## 0.2.0 (unreleased)
+
+- Dropped support for Ruby < 3
+
 ## 0.1.8 (2023-02-01)
 
 - Improved ARM detection
