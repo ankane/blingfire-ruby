@@ -5,7 +5,7 @@ module BlingFire
       if path
         raise Error, "Model not found" unless File.exist?(path)
         @handle = FFI.LoadModel(path)
-        ObjectSpace.define_finalizer(self, self.class.finalize(@handle))
+        @handle.free = FFI["FreeModel"]
 
         BlingFire.change_settings_dummy_prefix(@handle, prefix) unless prefix.nil?
       else
@@ -71,11 +71,6 @@ module BlingFire
 
     def to_ptr
       @handle
-    end
-
-    def self.finalize(pointer)
-      # must use proc instead of stabby lambda
-      proc { FFI.FreeModel(pointer) }
     end
   end
 end

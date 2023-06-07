@@ -127,4 +127,10 @@ class ModelTest < Minitest::Test
     end
     assert_equal "Model not found", error.message
   end
+
+  def test_copy
+    model = BlingFire.load_model("test/support/bert_base_tok.bin")
+    model.dup
+    model.clone
+  end
 end
