@@ -1,4 +1,4 @@
-## 0.2.0 (unreleased)
+## 0.2.0 (2023-09-20)
 
 - Fixed error with `dup` and `clone`
 - Dropped support for Ruby < 3
