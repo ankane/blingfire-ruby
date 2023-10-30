@@ -91,7 +91,7 @@ class ModelTest < Minitest::Test
     assert_equal "[UNK] [CLS] [SEP]", model.ids_to_text([100, 101, 102], skip_special_tokens: false)
   end
 
-  def test_ids_to_text_model_invalid
+  def test_ids_to_text_wrong_model_type
     model = BlingFire.load_model("test/support/bert_base_tok.bin")
     # ideally would raise an error
     # but no way to differentiate between all special tokens
