@@ -1,3 +1,7 @@
+## 0.2.1 (unreleased)
+
+- Fixed error with `ids_to_text` and all special tokens
+
 ## 0.2.0 (2023-09-20)
 
 - Fixed error with `dup` and `clone`

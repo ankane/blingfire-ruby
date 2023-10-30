@@ -86,6 +86,16 @@ class ModelTest < Minitest::Test
   def test_ids_to_text
     model = BlingFire.load_model("test/support/bert_base_cased_tok.i2w")
     assert_equal "This is a test", model.ids_to_text([1188, 1110, 170, 2774])
+    assert_equal "", model.ids_to_text([])
+    assert_equal "", model.ids_to_text([100, 101, 102]) # special tokens
+    assert_equal "[UNK] [CLS] [SEP]", model.ids_to_text([100, 101, 102], skip_special_tokens: false)
+  end
+
+  def test_ids_to_text_model_invalid
+    model = BlingFire.load_model("test/support/bert_base_tok.bin")
+    # ideally would raise an error
+    # but no way to differentiate between all special tokens
+    assert_equal "", model.ids_to_text([1188, 1110, 170, 2774])
   end
 
   def test_normalize_spaces

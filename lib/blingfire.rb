@@ -119,7 +119,7 @@ module BlingFire
       out = Fiddle::Pointer.malloc(output_buffer_size)
       out_size = FFI.IdsToText(model, c_ids, ids.size, out, output_buffer_size, skip_special_tokens ? 1 : 0)
       check_status out_size, out
-      encode_utf8(out.to_str(out_size - 1))
+      out_size <= 0 ? "" : encode_utf8(out.to_str(out_size - 1))
     end
 
     def free_model(model)
