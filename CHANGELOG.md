@@ -1,4 +1,4 @@
-## 0.2.1 (unreleased)
+## 0.2.1 (2023-12-12)
 
 - Fixed error with `ids_to_text` and all special tokens
 
