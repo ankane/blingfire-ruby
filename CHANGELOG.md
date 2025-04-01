@@ -1,3 +1,7 @@
+## 0.3.0 (unreleased)
+
+- Dropped support for Ruby < 3.2
+
 ## 0.2.2 (2024-12-29)
 
 - Fixed warning with Ruby 3.4
