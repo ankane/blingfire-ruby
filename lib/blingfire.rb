@@ -177,8 +177,8 @@ module BlingFire
     end
 
     def unpack_offsets(start_offsets, end_offsets, result, text)
-      start_bytes = start_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
-      end_bytes = end_offsets.to_s(Fiddle::SIZEOF_INT * result.size).unpack("i*")
+      start_bytes = start_offsets.to_str(Fiddle::SIZEOF_INT * result.size).unpack("i*")
+      end_bytes = end_offsets.to_str(Fiddle::SIZEOF_INT * result.size).unpack("i*")
       starts = []
       ends = []
 
