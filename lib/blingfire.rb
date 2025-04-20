@@ -92,7 +92,7 @@ module BlingFire
 
     def text_to_ids(model, text, max_len = nil, unk_id = 0)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
-      ids = Fiddle::Pointer.malloc((max_len || text.size) * Fiddle::SIZEOF_INT)
+      ids = Fiddle::Pointer.malloc((max_len || text.size) * Fiddle::SIZEOF_INT, Fiddle::RUBY_FREE)
       out_size = FFI.TextToIds(model, text, text.bytesize, ids, ids.size, unk_id)
       check_status out_size, ids
       ids[0, (max_len || out_size) * Fiddle::SIZEOF_INT].unpack("i!*")
@@ -100,10 +100,10 @@ module BlingFire
 
     def text_to_ids_with_offsets(model, text, max_len = nil, unk_id = 0)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
-      ids = Fiddle::Pointer.malloc((max_len || text.size) * Fiddle::SIZEOF_INT)
+      ids = Fiddle::Pointer.malloc((max_len || text.size) * Fiddle::SIZEOF_INT, Fiddle::RUBY_FREE)
 
-      start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size)
-      end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size)
+      start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size, Fiddle::RUBY_FREE)
+      end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size, Fiddle::RUBY_FREE)
 
       out_size = FFI.TextToIdsWithOffsets(model, text, text.bytesize, ids, start_offsets, end_offsets, ids.size, unk_id)
 
@@ -116,7 +116,7 @@ module BlingFire
     def ids_to_text(model, ids, skip_special_tokens: true, output_buffer_size: nil)
       output_buffer_size ||= ids.size * 32
       c_ids = Fiddle::Pointer[ids.pack("i*")]
-      out = Fiddle::Pointer.malloc(output_buffer_size)
+      out = Fiddle::Pointer.malloc(output_buffer_size, Fiddle::RUBY_FREE)
       out_size = FFI.IdsToText(model, c_ids, ids.size, out, output_buffer_size, skip_special_tokens ? 1 : 0)
       check_status out_size, out
       out_size <= 0 ? "" : encode_utf8(out.to_str(out_size - 1))
@@ -129,7 +129,7 @@ module BlingFire
     def normalize_spaces(text)
       u_space = 0x20
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
-      out = Fiddle::Pointer.malloc([text.bytesize * 1.5, 20].max)
+      out = Fiddle::Pointer.malloc([text.bytesize * 1.5, 20].max, Fiddle::RUBY_FREE)
       out_size = FFI.NormalizeSpaces(text, text.bytesize, out, out.size, u_space)
       check_status out_size, out
       encode_utf8(out.to_str(out_size))
@@ -150,7 +150,7 @@ module BlingFire
     def text_to(text, sep)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       # TODO allocate less, and try again if needed
-      out = Fiddle::Pointer.malloc([text.bytesize * 3, 20].max)
+      out = Fiddle::Pointer.malloc([text.bytesize * 3, 20].max, Fiddle::RUBY_FREE)
       out_size = yield(text, out)
       check_status out_size, out
       encode_utf8(out.to_str(out_size - 1)).split(sep)
@@ -159,10 +159,10 @@ module BlingFire
     def text_to_with_offsets(text, sep)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       # TODO allocate less, and try again if needed
-      out = Fiddle::Pointer.malloc([text.bytesize * 3, 20].max)
+      out = Fiddle::Pointer.malloc([text.bytesize * 3, 20].max, Fiddle::RUBY_FREE)
 
-      start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size)
-      end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size)
+      start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size, Fiddle::RUBY_FREE)
+      end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size, Fiddle::RUBY_FREE)
 
       out_size = yield(text, out, start_offsets, end_offsets)
 
