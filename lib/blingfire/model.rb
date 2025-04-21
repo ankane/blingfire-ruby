@@ -4,7 +4,7 @@ module BlingFire
       @handle = nil
       if path
         raise Error, "Model not found" unless File.exist?(path)
-        @handle = FFI.LoadModel(path)
+        @handle = FFI.LoadModel(+path)
         @handle.free = FFI["FreeModel"]
 
         BlingFire.change_settings_dummy_prefix(@handle, prefix) unless prefix.nil?

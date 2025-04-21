@@ -93,7 +93,7 @@ module BlingFire
     def text_to_ids(model, text, max_len = nil, unk_id = 0)
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       ids = Fiddle::Pointer.malloc((max_len || text.size) * Fiddle::SIZEOF_INT, Fiddle::RUBY_FREE)
-      out_size = FFI.TextToIds(model, text, text.bytesize, ids, ids.size, unk_id)
+      out_size = FFI.TextToIds(model, +text, text.bytesize, ids, ids.size, unk_id)
       check_status out_size, ids
       ids[0, (max_len || out_size) * Fiddle::SIZEOF_INT].unpack("i!*")
     end
@@ -105,7 +105,7 @@ module BlingFire
       start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size, Fiddle::RUBY_FREE)
       end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * ids.size, Fiddle::RUBY_FREE)
 
-      out_size = FFI.TextToIdsWithOffsets(model, text, text.bytesize, ids, start_offsets, end_offsets, ids.size, unk_id)
+      out_size = FFI.TextToIdsWithOffsets(model, +text, text.bytesize, ids, start_offsets, end_offsets, ids.size, unk_id)
 
       check_status out_size, ids
 
@@ -130,7 +130,7 @@ module BlingFire
       u_space = 0x20
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       out = Fiddle::Pointer.malloc([text.bytesize * 1.5, 20].max, Fiddle::RUBY_FREE)
-      out_size = FFI.NormalizeSpaces(text, text.bytesize, out, out.size, u_space)
+      out_size = FFI.NormalizeSpaces(+text, text.bytesize, out, out.size, u_space)
       check_status out_size, out
       encode_utf8(out.to_str(out_size))
     end
@@ -151,7 +151,7 @@ module BlingFire
       text = encode_utf8(text.dup) unless text.encoding == Encoding::UTF_8
       # TODO allocate less, and try again if needed
       out = Fiddle::Pointer.malloc([text.bytesize * 3, 20].max, Fiddle::RUBY_FREE)
-      out_size = yield(text, out)
+      out_size = yield(+text, out)
       check_status out_size, out
       encode_utf8(out.to_str(out_size - 1)).split(sep)
     end
@@ -164,7 +164,7 @@ module BlingFire
       start_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size, Fiddle::RUBY_FREE)
       end_offsets = Fiddle::Pointer.malloc(Fiddle::SIZEOF_INT * out.size, Fiddle::RUBY_FREE)
 
-      out_size = yield(text, out, start_offsets, end_offsets)
+      out_size = yield(+text, out, start_offsets, end_offsets)
 
       check_status out_size, out
 
