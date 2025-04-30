@@ -10,8 +10,6 @@ module BlingFire
       raise e
     end
 
-    typealias "bool", "char"
-
     # https://github.com/microsoft/BlingFire/blob/master/blingfiretools/blingfiretokdll/blingfiretokdll.cpp
 
     # version

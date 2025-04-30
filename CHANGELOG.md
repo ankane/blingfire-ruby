@@ -1,5 +1,6 @@
 ## 0.3.1 (unreleased)
 
+- Fixed issue with Fiddle 1.1.7+
 - Fixed memory leaks
 
 ## 0.3.0 (2025-04-03)

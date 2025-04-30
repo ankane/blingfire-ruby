@@ -117,7 +117,7 @@ module BlingFire
       output_buffer_size ||= ids.size * 32
       c_ids = Fiddle::Pointer[ids.pack("i*")]
       out = Fiddle::Pointer.malloc(output_buffer_size, Fiddle::RUBY_FREE)
-      out_size = FFI.IdsToText(model, c_ids, ids.size, out, output_buffer_size, skip_special_tokens ? 1 : 0)
+      out_size = FFI.IdsToText(model, c_ids, ids.size, out, output_buffer_size, !!skip_special_tokens)
       check_status out_size, out
       out_size <= 0 ? "" : encode_utf8(out.to_str(out_size - 1))
     end
@@ -137,7 +137,7 @@ module BlingFire
 
     def change_settings_dummy_prefix(model, value)
       # use opposite of value
-      ret = FFI.SetNoDummyPrefix(model, value ? 0 : 1)
+      ret = FFI.SetNoDummyPrefix(model, !value)
       raise Error, "Bad status: #{ret}" if ret != 1
     end
 
