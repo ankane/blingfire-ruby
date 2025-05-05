@@ -1,4 +1,4 @@
-## 0.3.1 (unreleased)
+## 0.3.1 (2025-05-04)
 
 - Fixed issue with Fiddle 1.1.7+
 - Fixed memory leaks
