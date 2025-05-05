@@ -15,5 +15,5 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 3.2"
 
-  spec.add_dependency "fiddle"
+  spec.add_dependency "fiddle", ">= 1.1.7"
 end
